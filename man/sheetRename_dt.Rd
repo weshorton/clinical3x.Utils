@@ -10,7 +10,7 @@
 data.table mapping short and long names
 \describe{
 \item{Short}{Shortened name}
-\itme{Long}{Original (long) name}
+\item{Long}{Original (long) name}
 }
 }
 }

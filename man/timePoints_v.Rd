@@ -12,6 +12,7 @@ Vector of length 17
 \item{values}{Timepoint}
 }
 }
+}
 \usage{
 timePoints_v
 }

@@ -42,7 +42,7 @@
 #' Vector of length 17
 #' \describe{
 #'    \item{values}{Timepoint}
-#'  
+#' }
 "timePoints_v"
 
 #' Time Colors
@@ -100,7 +100,7 @@
 #' data.table mapping short and long names
 #' \describe{
 #'    \item{Short}{Shortened name}
-#'    \itme{Long}{Original (long) name}
+#'    \item{Long}{Original (long) name}
 #'  }
 "sheetRename_dt"
 
