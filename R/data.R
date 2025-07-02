@@ -16,7 +16,7 @@
 #' 
 #' @format ## 'recistColors_v'
 #' Named vector of length 3
-#' \describe {
+#' \describe{
 #'    \item{values}{Hex Color}
 #'    \item{names}{RECIST Group}
 #'  }
@@ -28,7 +28,7 @@
 #' 
 #' @format ## 'cbColors_v'
 #' Named vector of length 2
-#' \describe {
+#' \describe{
 #'    \item{values}{Hex Color}
 #'    \item{names}{Clinical Benefit Group}
 #'  }
@@ -40,9 +40,9 @@
 #' 
 #' @format ## 'timePoints_v'
 #' Vector of length 17
-#' \describe {
+#' \describe{
 #'    \item{values}{Timepoint}
-#'  }
+#'  
 "timePoints_v"
 
 #' Time Colors
@@ -51,7 +51,7 @@
 #' 
 #' @format ## 'timeColors_v'
 #' Named vector of length 17
-#' \describe {
+#' \describe{
 #'    \item{values}{Hex Color}
 #'    \item{names}{Timepoint}
 #'  }
@@ -63,7 +63,7 @@
 #' 
 #' @format ## 'dirColors_v'
 #' Named vector of length 3
-#' \describe {
+#' \describe{
 #'    \item{values}{Hex Color}
 #'    \item{names}{Direction}
 #'  }
@@ -75,7 +75,7 @@
 #' 
 #' @format ## 'cycles_v'
 #' Vector of length 7
-#' \describe {
+#' \describe{
 #'    \item{values}{Cycle}
 #'  }
 "cycles_v"
@@ -86,7 +86,7 @@
 #' 
 #' @format ## 'cycles_lsv'
 #' Named list of length 4
-#' \describe {
+#' \describe{
 #'    \item{values}{Cycle/Day designations}
 #'    \item{names}{Cycle designation}
 #'  }
@@ -98,7 +98,7 @@
 #' 
 #' @format ## 'sheetRename_dt'
 #' data.table mapping short and long names
-#' \describe {
+#' \describe{
 #'    \item{Short}{Shortened name}
 #'    \itme{Long}{Original (long) name}
 #'  }
@@ -110,7 +110,7 @@
 #' 
 #' @format ## 'colors_v'
 #' Named vector of length 56
- #' \describe {
+ #' \describe{
 #'    \item{values}{Hex Code}
 #'    \item{names}{population/marker name}
 #'  }
@@ -122,7 +122,7 @@
 #' 
 #' @format ## 'shortNameColors_v'
 #' Named vector of length 56
-#' \describe {
+#' \describe{
 #'    \item{values}{Hex Code}
 #'    \item{names}{shortened population/marker name}
 #'  }
@@ -134,7 +134,7 @@
 #' 
 #' @format ## 'colors_v2_v'
 #' Named vector of length 56
-#' \describe {
+#' \describe{
 #'    \item{values}{Hex Code}
 #'    \item{names}{population/marker name}
 #'  }
@@ -146,7 +146,7 @@
 #' 
 #' @format ## 'shortNameColors_v2_v'
 #' Named vector of length 56
-#' \describe {
+#' \describe{
 #'    \item{values}{Hex Code}
 #'    \item{names}{shortened population/marker name}
 #'  }
@@ -158,7 +158,7 @@
 #' 
 #' @format ## 'cd48Markers_v'
 #' Vector of length 9
-#' \describe {
+#' \describe{
 #'    \item{values}{Marker}
 #'  }
 "cd48Markers_v"
@@ -169,7 +169,7 @@
 #' 
 #' @format ## 'cd48Markers_lsv'
 #' List of length 3
-#' \describe {
+#' \describe{
 #'    \item{names}{placeholder separater}
 #'    \item{values}{Marker}
 #'  }
@@ -181,7 +181,7 @@
 #' 
 #' @format ## 'radarMarkers_v'
 #' Vector of length 7
-#' \describe {
+#' \describe{
 #'    \item{values}{Marker}
 #'  }
 "radarMarkers_v"
@@ -192,7 +192,7 @@
 #' 
 #' @format ## 'compactSchema_dt'
 #' data.table identifying treatments given on each day
-#' \describe {
+#' \describe{
 #'    \item{A}{Day}
 #'    \item{B}{Treatment(s) given that day}
 #'  }
@@ -204,7 +204,7 @@
 #' 
 #' @format ## 'fullSchema_dt'
 #' data.table identifying treatments given on each day
-#' \describe {
+#' \describe{
 #'    \item{A}{Day}
 #'    \item{B}{Axatilimab (aCSF1R) treatments}
 #'    \item{C}{Retifanlimab (aPD1) treatments}
@@ -218,7 +218,7 @@
 #' 
 #' @format ## 'compactSchema_dt'
 #' data.table identifying treatments given on each day
-#' \describe {
+#' \describe{
 #'    \item{Tx}{Treatment (or treatment combination)}
 #'    \item{Color}{Hex code}
 #'  }
