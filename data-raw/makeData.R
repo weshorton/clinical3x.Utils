@@ -3,7 +3,6 @@ library(data.table)
 library(wrh.rUtils)
 library(RColorBrewer)
 devtools::load_all("~/my_tool_repos/colorblindr")
-source("./R/sortTimePoints.R")
 
 ###
 ### Make colors and other vars for project
