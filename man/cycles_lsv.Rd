@@ -8,7 +8,7 @@
 \subsection{'cycles_lsv'}{
 
 Named list of length 4
-\describe {
+\describe{
 \item{values}{Cycle/Day designations}
 \item{names}{Cycle designation}
 }

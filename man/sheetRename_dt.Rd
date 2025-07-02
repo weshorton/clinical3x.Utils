@@ -8,7 +8,7 @@
 \subsection{'sheetRename_dt'}{
 
 data.table mapping short and long names
-\describe {
+\describe{
 \item{Short}{Shortened name}
 \itme{Long}{Original (long) name}
 }

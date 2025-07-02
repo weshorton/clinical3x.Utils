@@ -8,7 +8,7 @@
 \subsection{'radarMarkers_v'}{
 
 Vector of length 7
-\describe {
+\describe{
 \item{values}{Marker}
 }
 }

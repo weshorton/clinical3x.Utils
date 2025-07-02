@@ -8,7 +8,7 @@
 \subsection{'cd48Markers_v'}{
 
 Vector of length 9
-\describe {
+\describe{
 \item{values}{Marker}
 }
 }

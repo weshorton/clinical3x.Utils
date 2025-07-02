@@ -8,7 +8,7 @@
 \subsection{'recistColors_v'}{
 
 Named vector of length 3
-\describe {
+\describe{
 \item{values}{Hex Color}
 \item{names}{RECIST Group}
 }

@@ -8,7 +8,7 @@
 \subsection{'cd48Markers_lsv'}{
 
 List of length 3
-\describe {
+\describe{
 \item{names}{placeholder separater}
 \item{values}{Marker}
 }

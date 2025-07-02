@@ -8,9 +8,8 @@
 \subsection{'timePoints_v'}{
 
 Vector of length 17
-\describe {
+\describe{
 \item{values}{Timepoint}
-}
 }
 }
 \usage{

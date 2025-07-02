@@ -8,7 +8,7 @@
 \subsection{'compactSchema_dt'}{
 
 data.table identifying treatments given on each day
-\describe {
+\describe{
 \item{Tx}{Treatment (or treatment combination)}
 \item{Color}{Hex code}
 }

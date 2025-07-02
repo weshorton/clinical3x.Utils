@@ -8,7 +8,7 @@
 \subsection{'compactSchema_dt'}{
 
 data.table identifying treatments given on each day
-\describe {
+\describe{
 \item{A}{Day}
 \item{B}{Treatment(s) given that day}
 }

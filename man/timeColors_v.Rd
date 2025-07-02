@@ -8,7 +8,7 @@
 \subsection{'timeColors_v'}{
 
 Named vector of length 17
-\describe {
+\describe{
 \item{values}{Hex Color}
 \item{names}{Timepoint}
 }

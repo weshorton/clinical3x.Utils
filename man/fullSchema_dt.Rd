@@ -8,7 +8,7 @@
 \subsection{'fullSchema_dt'}{
 
 data.table identifying treatments given on each day
-\describe {
+\describe{
 \item{A}{Day}
 \item{B}{Axatilimab (aCSF1R) treatments}
 \item{C}{Retifanlimab (aPD1) treatments}

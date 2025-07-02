@@ -8,7 +8,7 @@
 \subsection{'shortNameColors_v'}{
 
 Named vector of length 56
-\describe {
+\describe{
 \item{values}{Hex Code}
 \item{names}{shortened population/marker name}
 }

@@ -8,7 +8,7 @@
 \subsection{'colors_v2_v'}{
 
 Named vector of length 56
-\describe {
+\describe{
 \item{values}{Hex Code}
 \item{names}{population/marker name}
 }

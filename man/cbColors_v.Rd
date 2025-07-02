@@ -8,7 +8,7 @@
 \subsection{'cbColors_v'}{
 
 Named vector of length 2
-\describe {
+\describe{
 \item{values}{Hex Color}
 \item{names}{Clinical Benefit Group}
 }
