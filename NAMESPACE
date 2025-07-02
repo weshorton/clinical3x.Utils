@@ -2,6 +2,10 @@
 
 export(calcAndClassifyChanges)
 export(cbTimeSeries)
+export(cleanData)
+export(cleanFuncCols)
+export(cleanGmfiCols)
+export(cleanStackedCols)
 export(createSchemaTable)
 export(drawDiagonalCell)
 export(facetStackedBar)
