@@ -23,7 +23,7 @@ ggPlotRadar <- function(data_dt, markerCol_v = "marker", markers_v,
   
   ### Get timepoints
   if (is.null(time_v)) {
-    time_v <- sortTimePoints_v(unique(data_dt[[timeCol_v]]))
+    time_v <- sortTimePoints(unique(data_dt[[timeCol_v]]))
   } # fi
   
   ### Max number of entries
@@ -83,7 +83,7 @@ ggPlotRadar <- function(data_dt, markerCol_v = "marker", markers_v,
 
     ### Make plot
     curr_gg <- ggradar(plot.data = curr_dt,
-                       base.size = 15,
+                       base.size = 18,
                        font.radar = "sans",
                        axis.labels = plotCols_v,
                        
@@ -106,10 +106,10 @@ ggPlotRadar <- function(data_dt, markerCol_v = "marker", markers_v,
                        gridline.max.colour = "grey",                                # line color for max
                        
                        ### Control labels
-                       grid.label.size = 5,                                         # text size of gridline labels
+                       grid.label.size = 10,                                         # text size of gridline labels
                        gridline.label.offset = -0.1 * (gMax_v - centerY_v),         # left (-)/right (+) offset of labels relative to central vert axis
                        axis.label.offset = 1.15,                                    # vertical displacement of axis labels from maximum grid line, measured relative to circle diameter
-                       axis.label.size = 8,                                         # text size of axis labels
+                       axis.label.size = 12,                                         # text size of axis labels
                        axis.line.colour = "grey",                                   # axis line color
                        
                        ### Control groups
@@ -123,7 +123,7 @@ ggPlotRadar <- function(data_dt, markerCol_v = "marker", markers_v,
                        plot.legend = if (nrow(curr_dt) > 1) TRUE else FALSE,        # include legend? Yes if >1
                        legend.title = patientCol_v,                                 # legend title
                        plot.title = currTime_v,                                     # plot title
-                       legend.text.size = 14,                                       # legend text size
+                       legend.text.size = 20,                                       # legend text size
                        legend.position = "left",                                    # legend location (top, bottom, left, right)
                        
                        ### Other plotting params
@@ -141,6 +141,9 @@ ggPlotRadar <- function(data_dt, markerCol_v = "marker", markers_v,
       gotLegend_v <- T
     } # fi
     
+    ### Adjust title size
+    curr_gg <- curr_gg + theme(plot.title = element_text(size = 48, hjust = 0.5))
+    
     ### Add to list
     plot_lsgg[[currTime_v]] <- curr_gg
 
@@ -153,22 +156,29 @@ ggPlotRadar <- function(data_dt, markerCol_v = "marker", markers_v,
   ### Add legend
   plot_lsgg[["legend"]] <- legendGrob
   
+  ### Get rows/columns
+  # dims_v <- getDims(length(plot_lsgg)) # original version copies ggarrange behavior
+  # width_v <- 9*dims_v[1]
+  # height_v <- 10*dims_v[2]
+  dims_v <- c(ceiling(length(plot_lsgg)/3), 3) # always 3 columns
+  width_v <- 5*dims_v[1]
+  height_v <- 15*dims_v[2]
+  
   ### Combine
-  plot_gg <- ggpubr::ggarrange(plotlist = plot_lsgg, legend = "none")
+  plot_gg <- ggpubr::ggarrange(plotlist = plot_lsgg, legend = "none", nrow = dims_v[1], ncol = dims_v[2])
   
   ### Add title
   if (!is.null(name_v)) {
-    plot_gg <- ggpubr::annotate_figure(plot_gg, top = ggpubr::text_grob(label = paste0(name_v, " Functionality"), size = 24))
+    plot_gg <- ggpubr::annotate_figure(plot_gg, top = ggpubr::text_grob(label = paste0(name_v, " Functionality"), size = 64))
   }
   
-  ### Get dims
-  dims_v <- getDims(length(plot_lsgg))
-  
   ### Make file
-  if (!is.null(file_v)) pdf(file = file_v, width = 9*dims_v[1], height = 10*dims_v[2])
+  if (!is.null(file_v)) {
+    pdf(file = file_v, width = width_v, height = height_v)
+    print(plot_gg)
+    dev.off()
+  } else {
+    return(plot_gg)
+  }
   
-  print(plot_gg)
-  
-  if (!is.null(file_v)) dev.off()
-  
-} # plotRadar
+} # ggPlotRadar
