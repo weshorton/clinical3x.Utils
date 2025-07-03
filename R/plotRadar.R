@@ -1,7 +1,7 @@
 plotRadar <- function(data_dt, markerCol_v = "marker", markers_v, 
                       patientCol_v = "Patients", patientColors_v,
                       timeCol_v = "Time point", time_v = NULL, global_v = T,
-                      file_v = NULL) {
+                      file_v = NULL, title_v = NULL) {
   #' Plot Radar
   #' @description Wrapper for FSMB Radar plot
   #' @param data_dt data.table with functional markers
@@ -25,7 +25,7 @@ plotRadar <- function(data_dt, markerCol_v = "marker", markers_v,
   
   ### Get timepoints
   if (is.null(time_v)) {
-    time_v <- sortTimePoints_v(unique(data_dt[[timeCol_v]]))
+    time_v <- sortTimePoints(unique(data_dt[[timeCol_v]]))
   } # fi
   
   ### Prepare each data.frame
@@ -89,7 +89,7 @@ plotRadar <- function(data_dt, markerCol_v = "marker", markers_v,
   
   ### Make pars
   #opar <- par()
-  par(mar = rep(0.8,4))
+  par(mar = rep(0.7,4)) # started with 0.8
   par(mfrow = c(nRow_v, nCol_v))
   
   ### Print plots
@@ -122,7 +122,7 @@ plotRadar <- function(data_dt, markerCol_v = "marker", markers_v,
                seg = 3,                                   # number of segments on the axis (4 is default)
                axislabcol = 'blue',                       # color of axis labels
                caxislabels = NULL,                        # center axis labels (don't use)
-               calcex = 1,                                # magnification of center axis labels
+               calcex = 1.5,                                # magnification of center axis labels
                paxislabels = NULL,                        # peripheral axis labels (don't use)
                palcex = 3,                                # magnification of peripheral axis labels
                
@@ -139,6 +139,8 @@ plotRadar <- function(data_dt, markerCol_v = "marker", markers_v,
     ### Add legend
     legend(x = "bottom", legend = names(patientColors_v), horiz = T, pch = 20, inset = c(0, -0.025),
            bty = "n", col = patientColors_v, text.col = "black", cex = 1, pt.cex = 1.5)
+    
+    #if (!is.null(title_v)) title(main = title_v)
     
   } # for i
   

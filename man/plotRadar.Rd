@@ -13,7 +13,8 @@ plotRadar(
   timeCol_v = "Time point",
   time_v = NULL,
   global_v = T,
-  file_v = NULL
+  file_v = NULL,
+  title_v = NULL
 )
 }
 \arguments{
