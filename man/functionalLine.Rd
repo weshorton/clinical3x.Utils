@@ -38,6 +38,9 @@ functionalLine(
 
 \item{title_v}{title for plot}
 }
+\value{
+ggplot
+}
 \description{
 Line/spaghetti plot of functional expression
 }
