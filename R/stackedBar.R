@@ -69,6 +69,8 @@ stackedBar <- function(data_dt,
   #' @param fillVar_v variable to fill stacked bars b y (should always be 'variable')
   #' @param title_v optional plot title
   #' @param colors_v named color vector that matches values in fillVar_v (optional, but should be provided)
+  #' @import data.table
+  #' @import ggplot2
   #' @return ggplot
   #' @export
 
@@ -84,7 +86,10 @@ stackedBar <- function(data_dt,
   plot_gg <- ggplot(data = sub_dt, 
                     aes(x = !!sym(xVar_v), y = !!sym(yVar_v), fill = !!sym(fillVar_v))) +
     geom_bar(position = "stack", stat = "identity") +
-    my_theme() + angle_x() + labs(y = "Population Pct") #+
+    # my_theme() + 
+    massive_label() +
+    #big_label(angleY_v = F) +
+    angle_x() + labs(y = "Population Pct") #+
     #theme(legend.position = "bottom") + guides(fill = guide_legend(ncol = 2)) # messing with different legend formats
   
   ### Add colors
