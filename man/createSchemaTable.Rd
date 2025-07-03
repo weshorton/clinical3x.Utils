@@ -2,7 +2,7 @@
 % Please edit documentation in R/createSchemaTable.R
 \name{createSchemaTable}
 \alias{createSchemaTable}
-\title{Create Diagonal Table}
+\title{Create Schema Table}
 \usage{
 createSchemaTable(data_dt, colorMap_dt, direction_v = "backward")
 }

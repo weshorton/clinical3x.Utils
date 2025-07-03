@@ -1,6 +1,6 @@
 ### Function to create diagonal split cells
 createSchemaTable <- function(data_dt, colorMap_dt, direction_v = "backward") {
-  #' Create Diagonal Table
+  #' Create Schema Table
   #' @description
   #' Make a gtable with specified cells specially-colored with diagonals
   #' @param data_dt input table to be displayed
