@@ -16,6 +16,7 @@ LazyData: true
 Imports: 
     data.table,
     ggplot2,
+    grid,
     wrh.rUtils
 Remotes:
     weshorton/wrh.rUtils
