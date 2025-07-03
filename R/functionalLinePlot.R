@@ -16,6 +16,10 @@ functionalLine <- function(func_dt,
   #' @param xVar_v column to put on x-axis. Should be 'Time point'
   #' @param yVar_v column to use for y-axis. Should be 'value'
   #' @param title_v title for plot
+  #' @import data.table
+  #' @import ggplot2
+  #' @return ggplot
+  #' @export
   
   ### Subset data
   subFunc_dt <- func_dt[get(patientCol_v) == pt_v & 
@@ -30,7 +34,8 @@ functionalLine <- function(func_dt,
     geom_line(size = 1.5) +
     facet_wrap(formula_v, axes = "all_x") +
     scale_color_manual(values = markerColors_v, breaks = names(markerColors_v)) +
-    big_label(angleY_v = F) + angle_x() +
+    #big_label(angleY_v = F) + angle_x() +
+    massive_label() +
     ggtitle(title_v) +
     labs(y = "Percent Functional", x = NULL)
   
