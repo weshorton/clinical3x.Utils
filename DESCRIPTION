@@ -20,5 +20,5 @@ Imports:
     grid,
     wrh.rUtils
 Remotes:
-    weshorton/wrh.rUtils
+    weshorton/wrh.rUtils,
     ricardo-bion/ggradar
