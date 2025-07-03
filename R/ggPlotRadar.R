@@ -15,6 +15,7 @@ ggPlotRadar <- function(data_dt, markerCol_v = "marker", markers_v,
   #' @param name_v optional vector to label the entire plot (e.g. CD4+ Tcm)
   #' @param file_v optional file to save output. If NULL, will print to console
   #' @return returns NULL (print to console). Save pdf if file_v is provided.
+  #' @import ggradar
   #' @export
   
   ###
