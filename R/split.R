@@ -1,4 +1,10 @@
 splitGmfiOrFuncData <- function(data_dt) {
+  #' Split Gmfi Or Functional Data
+  #' @description
+    #' Split into different tables
+  #' @param data_dt raw data
+  #' @return list of data.tables made up of input data_dt
+  #' @export
   
   ### Get unique cell types
   cellTypes_v <- setdiff(unique(gsub("_.*$", "", colnames(data_dt))), "File")
@@ -27,6 +33,13 @@ splitMinorPops <- function(data_dt,
                                           "MyeloidDCs" = c("CD1c+ cDC2", "CD141+ cDC1"),
                                           "Granulocytes" = c("CD15+ CD49d+ eosinophils", "CD15+ CD123+ basophils", 
                                                              "CD15+ putative neutrophils"))) {
+  #' Split Minor Pops
+  #' @description
+  #' Split into different tables
+  #' @param data_dt raw data
+  #' @param map_lsv named list indicating which populations to put into which output data.table
+  #' @return list of data.tables made up of input data_dt
+  #' @export
   
   out_lsdt <- sapply(names(map_lsv), function(x) {
     pops_v <- map_lsv[[x]]
@@ -38,6 +51,12 @@ splitMinorPops <- function(data_dt,
 } # splitMinorPops
 
 splitTSubsets <- function(data_dt, split_v = c("CD4", "CD8")) {
+  #' Split T Subsets
+  #' @description
+  #' Split into different tables
+  #' @param data_dt raw data
+  #' @return list of data.tables made up of input data_dt
+  #' @export
   
   out_lsdt <- sapply(split_v, function(x) {
     data_dt[,mget(c("File", grep(x, colnames(data_dt), value = T)))]

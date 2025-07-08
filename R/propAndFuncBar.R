@@ -17,6 +17,9 @@ propAndFuncBar <- function(data_dt, func_dt,
   #' @param markers_v which markers to plot
   #' @param markerColors_v color vector for marker color scale
   #' @param title_v title for plot
+  #' @param allOut_v logical indicating whether to output list of stuff or just the combined plot
+  #' @return either list or ggplot
+  #' @export
   
   ### Subset data
   sub_dt <- data_dt[get(patientCol_v) == pt_v & 

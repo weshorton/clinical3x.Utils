@@ -40,6 +40,11 @@ propAndFuncBar(
 \item{time_v}{which time to plot}
 
 \item{title_v}{title for plot}
+
+\item{allOut_v}{logical indicating whether to output list of stuff or just the combined plot}
+}
+\value{
+either list or ggplot
 }
 \description{
 Combo plot showing stacked bar of cell proportions and
