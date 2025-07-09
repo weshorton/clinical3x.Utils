@@ -9,6 +9,10 @@ sortTimePoints <- function(timePoints_v) {
   
   ### Get all the different cycles
   toSplit_v <- unique(gsub("D.*$", "", timePoints_v))
+  
+  ### Sort them
+  toSplit_v <- toSplit_v[order(as.numeric(gsub("C", "", toSplit_v)))]
+  
   timePoints_lsv <- sapply(toSplit_v, function(x) {
     ### Subset for them
     y <- grep(x, timePoints_v, value = T)
