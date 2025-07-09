@@ -223,3 +223,31 @@
 #'    \item{Color}{Hex code}
 #'  }
 "schemaColorMap_dt"
+
+#' Color Map List
+#' 
+#' list to map color names (including combo names) with hex codes
+#' Same as schemaColorMap_dt, but list form
+#' 
+#' @format ## 'schemaColorMap_lsv'
+#' data.table identifying treatments given on each day
+#' \describe{
+#'    \item{names}{Treatment (or treatment combination)}
+#'    \item{values}{Hex code}
+#'  }
+"schemaColorMap_lsv"
+
+#' Treatment-Date Map Table
+#' 
+#' data.table to map time points (date) with cycle, day, treatment, and color
+#' 
+#' @format ## 'treatDateMap_dt'
+#' data.table identifying treatments given on each day/cycle and their color
+#' \describe{
+#'    \item{Time points}{CycleDay time points}
+#'    \item{Cycle}{treatment cycle}
+#'    \item{Day}{treatment day (within cycle)}
+#'    \item{Tx}{Treatment (or treatment combination)}
+#'    \item{Color}{Hex code}
+#'  }
+"treatDateMap_dt"

@@ -32,6 +32,7 @@ usethis::use_data(cbColors_v, overwrite = T)
 ### Time colors
 timePoints_v <- c("C1D-14", "C1D-8", "C1D1", "C1D8", "C1D15", "C1D22", "C2D1", "C2D8", "C2D15", 
                   "C2D22", "C3D1", "C3D8", "C3D15", "C4D1", "C5D1", "C6D1", "C7D1")
+timePoints_v <- sortTimePoints(timePoints_v)
 
 usethis::use_data(timePoints_v, overwrite = T)
 
@@ -116,7 +117,19 @@ usethis::use_data(fullSchema_dt, overwrite = T)
 # schemaColorMap_dt <- data.table("Tx" = c("aCSF1R", "aPD1", "PTX", "PTX+aPD1", "PTX+aCSF1R"),
 #                                 "Color" = c("#DA7842", "#489CD0", "#000000", "#000000+#489CD0", "#000000+#DA7842"))
 
-schemaColorMap_dt <- data.table("Tx" = c("aCSF1R", "aPD1", "PTX", "PTX+aPD1", "PTX+aCSF1R"),
-                                "Color" = c("#76D6FF", "#FF3092", "#7030A0", "#7030A0+#FF3092", "#7030A0+#76D6FF"))
+schemaColorMap_dt <- data.table("Tx" = c("none", "aCSF1R", "aPD1", "PTX", "PTX+aPD1", "PTX+aCSF1R"),
+                                "Color" = c("white", "#76D6FF", "#FF3092", "#7030A0", "#7030A0+#FF3092", "#7030A0+#76D6FF"))
+
+schemaColorMap_lsv <- list("none" = "white", "aCSF1R" = "#76D6FF", "aPD1" = "#FF3092", "PTX" = "#7030A0", 
+                           "PTX+aPD1" = c("#7030A0", "#FF3092"), "PTX+aCSF1R" = c("#7030A0", "#76D6FF"))
+
+treatDateMap_dt <- data.table("Time points" = timePoints_v,
+                              "Cycle" = gsub("D.*$", "", timePoints_v),
+                              "Day" = paste0("D", gsub("^.*D", "", timePoints_v)),
+                              "Tx" = c("none", "aCSF1R", rep(c("PTX+aPD1", "PTX+aCSF1R", "PTX", "aCSF1R"), 2),
+                                       "PTX+aPD1", "PTX+aCSF1R", "PTX", rep("PTX+aPD1", 4)))
+treatDateMap_dt <- merge(treatDateMap_dt, schemaColorMap_dt, by = "Tx", sort = F)
 
 usethis::use_data(schemaColorMap_dt, overwrite = T)
+usethis::use_data(schemaColorMap_lsv, overwrite = T)
+usethis::use_data(treatDateMap_dt, overwrite = T)
