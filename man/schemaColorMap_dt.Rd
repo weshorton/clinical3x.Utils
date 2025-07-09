@@ -5,7 +5,7 @@
 \alias{schemaColorMap_dt}
 \title{Color Map Table}
 \format{
-\subsection{'compactSchema_dt'}{
+\subsection{'schemaColorMap_dt'}{
 
 data.table identifying treatments given on each day
 \describe{

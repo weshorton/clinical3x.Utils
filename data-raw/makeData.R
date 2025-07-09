@@ -113,7 +113,10 @@ fullSchema_dt <- as.data.table(t(data.table("A" = c("Tx", paste0("Cx", c("D-8", 
 usethis::use_data(fullSchema_dt, overwrite = T)
 
 ### Color mapping table
+# schemaColorMap_dt <- data.table("Tx" = c("aCSF1R", "aPD1", "PTX", "PTX+aPD1", "PTX+aCSF1R"),
+#                                 "Color" = c("#DA7842", "#489CD0", "#000000", "#000000+#489CD0", "#000000+#DA7842"))
+
 schemaColorMap_dt <- data.table("Tx" = c("aCSF1R", "aPD1", "PTX", "PTX+aPD1", "PTX+aCSF1R"),
-                                "Color" = c("#DA7842", "#489CD0", "#000000", "#000000+#489CD0", "#000000+#DA7842"))
+                                "Color" = c("#76D6FF", "#FF3092", "#7030A0", "#7030A0+#FF3092", "#7030A0+#76D6FF"))
 
 usethis::use_data(schemaColorMap_dt, overwrite = T)

@@ -216,7 +216,7 @@
 #' 
 #' data.table to map color names (including combo names) with hex codes
 #' 
-#' @format ## 'compactSchema_dt'
+#' @format ## 'schemaColorMap_dt'
 #' data.table identifying treatments given on each day
 #' \describe{
 #'    \item{Tx}{Treatment (or treatment combination)}
