@@ -120,8 +120,8 @@ usethis::use_data(fullSchema_dt, overwrite = T)
 schemaColorMap_dt <- data.table("Tx" = c("none", "aCSF1R", "aPD1", "PTX", "PTX+aPD1", "PTX+aCSF1R"),
                                 "Color" = c("white", "#76D6FF", "#FF3092", "#7030A0", "#7030A0+#FF3092", "#7030A0+#76D6FF"))
 
-schemaColorMap_lsv <- list("none" = "white", "aCSF1R" = "#76D6FF", "aPD1" = "#FF3092", "PTX" = "#7030A0", 
-                           "PTX+aPD1" = c("#7030A0", "#FF3092"), "PTX+aCSF1R" = c("#7030A0", "#76D6FF"))
+schemaColorMap_v <- c("none" = "white", "aCSF1R" = "#76D6FF", "aPD1" = "#FF3092", "PTX" = "#7030A0", 
+                      "PTX+aPD1" = c("#7030A0+#FF3092"), "PTX+aCSF1R" = c("#7030A0+#76D6FF"))
 
 treatDateMap_dt <- data.table("Time points" = timePoints_v,
                               "Cycle" = gsub("D.*$", "", timePoints_v),
@@ -131,5 +131,5 @@ treatDateMap_dt <- data.table("Time points" = timePoints_v,
 treatDateMap_dt <- merge(treatDateMap_dt, schemaColorMap_dt, by = "Tx", sort = F)
 
 usethis::use_data(schemaColorMap_dt, overwrite = T)
-usethis::use_data(schemaColorMap_lsv, overwrite = T)
+usethis::use_data(schemaColorMap_v, overwrite = T)
 usethis::use_data(treatDateMap_dt, overwrite = T)

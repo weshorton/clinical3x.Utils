@@ -224,18 +224,18 @@
 #'  }
 "schemaColorMap_dt"
 
-#' Color Map List
+#' Color Map Vector
 #' 
-#' list to map color names (including combo names) with hex codes
-#' Same as schemaColorMap_dt, but list form
+#' vector to map color names (including combo names) with hex codes
+#' Same as schemaColorMap_dt, but vector form
 #' 
-#' @format ## 'schemaColorMap_lsv'
-#' data.table identifying treatments given on each day
+#' @format ## 'schemaColorMap_v'
+#' vector with treatment colors
 #' \describe{
 #'    \item{names}{Treatment (or treatment combination)}
 #'    \item{values}{Hex code}
 #'  }
-"schemaColorMap_lsv"
+"schemaColorMap_v"
 
 #' Treatment-Date Map Table
 #' 
