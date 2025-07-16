@@ -26,7 +26,7 @@ cleanFuncCols <- function(data_dt) {
       out <- x
     } else {
       y <- strsplit(x, split = "\\/")[[1]]
-      out <- paste(y[(length(y)-1)], y[length(y)], sep = "_")
+      out <- paste(trimws(y[(length(y)-1)]), y[length(y)], sep = "_")
     }
     return(out)}))
   
@@ -95,7 +95,7 @@ cleanStackedCols <- function(data_dt) {
   cols_v <- colnames(data_dt)
   
   ### Get the population (after last / and before the |)
-  pops_v <- gsub("^.*\\/", "", gsub(" \\| .*$", "", cols_v))
+  pops_v <- trimws(gsub("^.*\\/", "", gsub(" \\| .*$", "", cols_v)))
   
   ### Add back
   colnames(data_dt) <- pops_v

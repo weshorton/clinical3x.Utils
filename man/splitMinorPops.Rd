@@ -10,7 +10,7 @@ splitMinorPops(
     "CD19+CD20- Plasmablasts Plasma cells"), Tcells = c("CD4+ T cells", "CD8+ T cells",
     "CD8+ CD4+ double positive T cells", "CD8- CD4- double negative T cells"), NKcells =
     c("CD56bright CD16- NK cells", "CD56dim CD16+ NK cells", "CD56dim CD16- NK cells"),
-    MyeloidAPCs = c("CD14+ CD16+ intermediary Monocytes ",
+    MyeloidAPCs = c("CD14+ CD16+ intermediary Monocytes",
     "CD14+ CD16- classical Monocytes", "CD14dim CD16+ non-classical Monocytes",
     "CD11c+ Myeloid DCs", "CD123+ CD11c+ plasmacytoid DCs"), MyeloidDCs = c("CD1c+ cDC2",
     
