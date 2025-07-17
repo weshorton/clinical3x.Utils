@@ -130,6 +130,12 @@ treatDateMap_dt <- data.table("Time points" = timePoints_v,
                                        "PTX+aPD1", "PTX+aCSF1R", "PTX", rep("PTX+aPD1", 4)))
 treatDateMap_dt <- merge(treatDateMap_dt, schemaColorMap_dt, by = "Tx", sort = F)
 
+treatAnnotColors_lsv <- list("Axatilimab" = c("none" = "white", "Axatilimab" = "#76D6FF"),
+                             "Retifanlimab" = c("none"= "white", "Retifanlimab" = "#FF3092"),
+                             "Paclitaxel" = c("none" = "white", "Paclitaxel" = "#7030A0"))
+
+
+usethis::use_data(treatAnnotColors_lsv, overwrite = T)
 usethis::use_data(schemaColorMap_dt, overwrite = T)
 usethis::use_data(schemaColorMap_v, overwrite = T)
 usethis::use_data(treatDateMap_dt, overwrite = T)
