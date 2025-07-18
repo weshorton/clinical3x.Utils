@@ -28,7 +28,8 @@ popLine <- function(bar_dt,
     geom_point(cex = 1.5) +
     geom_line(size = 1.5) +
     scale_color_manual(values = ptColors_v, breaks = names(ptColors_v)) +
-    massive_label() +
+    #massive_label() +
+    big_label() + angle_x() +
     ggtitle(title_v) +
     labs(y = yLab_v, x = NULL)
   
