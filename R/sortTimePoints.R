@@ -11,7 +11,7 @@ sortTimePoints <- function(timePoints_v) {
   toSplit_v <- unique(gsub("D.*$", "", timePoints_v))
   
   ### Sort them
-  toSplit_v <- toSplit_v[order(as.numeric(gsub("C", "", toSplit_v)))]
+  toSplit_v <- toSplit_v[order(as.numeric(gsub("C", "", gsub("LI|LI_", 0, toSplit_v))))]
   
   timePoints_lsv <- sapply(toSplit_v, function(x) {
     ### Subset for them
