@@ -9,7 +9,7 @@ devtools::load_all("~/my_tool_repos/colorblindr")
 ###
 
 ### Patients
-ptColors_v <- c("#AE76A3", "#7BAFDE", "#CAE0AB", "#F6C141", "#1965B0", "#E8601C")
+ptColors_v <- c("#7BAFDE", "#AE76A3", "#CAE0AB", "#F6C141", "#1965B0", "#E8601C")
 pts_v <- c("001-001", "001-002", "001-003", "001-004", "001-005")
 ptColors_v <- ptColors_v[1:length(pts_v)]
 names(ptColors_v) <- pts_v
