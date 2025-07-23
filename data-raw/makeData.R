@@ -17,8 +17,12 @@ names(ptColors_v) <- pts_v
 usethis::use_data(ptColors_v, overwrite = T)
 
 ### Make CB colors
-recistColors_v <- c("PR" = brewer.pal(9, "Set1")[3], # green
-                    "SD" = brewer.pal(9, "Set1")[5], # orange
+# recistColors_v <- c("PR" = brewer.pal(9, "Set1")[3], # green
+#                     "SD" = brewer.pal(9, "Set1")[5], # orange
+#                     "PD" = brewer.pal(9, "Set1")[1]) # red
+
+recistColors_v <- c("PR" = "#3B6432",
+                    "SD" = brewer.pal(9, "Set1")[3], # lighter green
                     "PD" = brewer.pal(9, "Set1")[1]) # red
 
 usethis::use_data(recistColors_v, overwrite = T)
