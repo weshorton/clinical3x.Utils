@@ -28,10 +28,10 @@ functionalLine <- function(func_dt,
     geom_point(cex = 1.5) +
     geom_line(size = 1.5) +
     scale_color_manual(values = markerColors_v, breaks = names(markerColors_v)) +
-    #big_label(angleY_v = F) + angle_x() +
-    massive_label() +
+    big_label(angleY_v = F) + angle_x() +
+    #massive_label() +
     ggtitle(title_v) +
-    labs(y = "Percent Functional", x = NULL)
+    labs(y = "% Functional", x = NULL)
   
   return(plot_gg)
   
