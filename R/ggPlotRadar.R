@@ -56,6 +56,8 @@ ggPlotRadar <- function(data_dt, markerCol_v = "marker", markers_v,
     
   } # for i
   
+  if (!length(data_lsdt)) return(NULL)
+  
   ###
   ### Make Plots ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   ###
