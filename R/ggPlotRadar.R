@@ -35,6 +35,12 @@ ggPlotRadar <- function(data_dt, markerCol_v = "marker", markers_v,
   ### Max number of entries
   maxPt_v <- length(unique(data_dt[[patientCol_v]]))
   
+  ### New - get globals
+  plotCols_v <- setdiff(colnames(data_dt), c(patientCol_v, timeCol_v))
+  globalMax_v <- max(data_dt[, mget(plotCols_v)])
+  globalMin_v <- min(data_dt[, mget(plotCols_v)])
+  globalMid_v <- round((globalMax_v - globalMin_v) / 2, 2)
+  
   ### Prepare each data.frame
   ### Remove any that don't fit
   data_lsdt <- list()
@@ -74,7 +80,8 @@ ggPlotRadar <- function(data_dt, markerCol_v = "marker", markers_v,
     currTime_v <- names(data_lsdt)[i]
     curr_dt <- data_lsdt[[currTime_v]]
     
-    plot_lsgg[[currTime_v]] <- makeRadar(curr_dt, currTime_v, patientCol_v, patientColors_v, legend_v = makeLegend_v, maxPt_v)
+    plot_lsgg[[currTime_v]] <- makeRadar(curr_dt, currTime_v, patientCol_v, patientColors_v, legend_v = makeLegend_v, maxPt_v,
+                                         globalMin_v, globalMid_v, globalMax_v)
     makeLegend_v <- F
     
   } # for i
@@ -127,11 +134,12 @@ makeRadar <- function(curr_dt,
                       currTime_v,
                       patientCol_v,
                       patientColors_v,
-                      legend_v, maxPt_v) {
+                      legend_v, maxPt_v,
+                      globalMin_v, globalMid_v, globalMax_v) {
   
-  ### Get argument values (required for testing)
-  gMin_v <- 0; gMax_v <- 1; gMid_v <- 0.5
-  centerY_v <- gMin_v - ((1/3) * (gMax_v - gMin_v))
+  # ### Get argument values (required for testing)
+  # gMin_v <- 0; gMax_v <- 1; gMid_v <- 0.5
+  # centerY_v <- gMin_v - ((1/3) * (gMax_v - gMin_v))
   
   ### Axis label values ----------------------------------------------------
   plotCols_v <- setdiff(colnames(curr_dt), patientCol_v)
@@ -139,13 +147,21 @@ makeRadar <- function(curr_dt,
   min_v <- min(curr_dt[, mget(plotCols_v)])
   mid_v <- round((max_v - min_v) / 2, 2)
   
-  radarVals_v <- c(paste0(round(min_v, 2), " (0%)"),
-                   paste0(mid_v,          " (50%)"),
-                   paste0(round(max_v, 2), " (100%)"))
+  # radarVals_v <- c(paste0(round(min_v, 2), " (0%)"),
+  #                  paste0(mid_v,          " (50%)"),
+  #                  paste0(round(max_v, 2), " (100%)"))
+  
+  radarVals_v <- c(paste0(round(globalMin_v, 2), " (0%)"),
+                   paste0(globalMid_v,          " (50%)"),
+                   paste0(round(globalMax_v, 2), " (100%)"))
   
   ### Colours --------------------------------------------------------------
   plotColors_v <- patientColors_v[names(patientColors_v) %in%
                                     curr_dt[[patientCol_v]]]
+  
+  ### Get argument values (required for testing)
+  gMin_v <- globalMin_v; gMax_v <- globalMax_v; gMid_v <- globalMid_v
+  centerY_v <- gMin_v - ((1/3) * (gMax_v - gMin_v))
   
   ### Build plot -----------------------------------------------------------
   curr_gg <- ggradar(plot.data = curr_dt,

@@ -10,7 +10,10 @@ makeRadar(
   patientCol_v,
   patientColors_v,
   legend_v,
-  maxPt_v
+  maxPt_v,
+  globalMin_v,
+  globalMid_v,
+  globalMax_v
 )
 }
 \arguments{
