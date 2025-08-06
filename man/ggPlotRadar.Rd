@@ -19,7 +19,7 @@ ggPlotRadar(
 \arguments{
 \item{data_dt}{data.table with functional markers}
 
-\item{markerCol_v}{column in data_dt that identifies markers that can be plotted (should be 'marker')}
+\item{markerCol_v}{column in data_dt that identifies markers that can be plotted (should be 'marker') - not used?}
 
 \item{markers_v}{character vector indicating which markers in markerCol_v to include in the plot}
 
@@ -40,4 +40,11 @@ returns NULL (print to console). Save pdf if file_v is provided.
 }
 \description{
 Wrapper for FSMB Radar plot
+}
+\details{
+I think this is more difficult than it needs to be? If I give a melted table then I might have more flexibility on what
+gets put where. Also I should make the variables more generic. timeCol_v should be "perPlotCol" (or something indicating that
+this variable determines how many plots to make); patientCol_v should be "lineCol" or whatever to indicate that's the lines;
+finally markerCol_v isn't used, but would be if I did the melt thing and I want to change this to axisLabels or something to indicate
+these will be around the edge of the radar.
 }
