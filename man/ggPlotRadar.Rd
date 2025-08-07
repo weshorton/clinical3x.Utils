@@ -13,6 +13,7 @@ ggPlotRadar(
   timeCol_v = "Time point",
   time_v = NULL,
   name_v = NULL,
+  plotGlobalMax_v = T,
   file_v = NULL
 )
 }
