@@ -28,8 +28,8 @@ calcAndClassifyChanges <- function(data_dt, comparisons_lsv, idCol_v = "Time poi
     currVars_v <- comparisons_lsv[[currName_v]]
     
     ### Split table
-    curr1_dt <- subMelt_dt[`Time point` == currVars_v[1],]
-    curr2_dt <- subMelt_dt[`Time point` == currVars_v[2],]
+    curr1_dt <- data_dt[`Time point` == currVars_v[1],]
+    curr2_dt <- data_dt[`Time point` == currVars_v[2],]
     
     ### Merge
     merge_dt <- merge(curr1_dt, curr2_dt,
