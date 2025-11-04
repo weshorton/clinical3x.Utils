@@ -4,10 +4,12 @@
 \alias{splitGmfiOrFuncData}
 \title{Split Gmfi Or Functional Data}
 \usage{
-splitGmfiOrFuncData(data_dt)
+splitGmfiOrFuncData(data_dt, metaCols_v = NULL)
 }
 \arguments{
 \item{data_dt}{raw data}
+
+\item{metaCols_v}{optional metadata columns to keep for each}
 }
 \value{
 list of data.tables made up of input data_dt

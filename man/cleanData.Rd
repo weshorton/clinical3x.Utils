@@ -4,10 +4,12 @@
 \alias{cleanData}
 \title{Clean Data}
 \usage{
-cleanData(data_dt)
+cleanData(data_dt, metaCols_v = NULL)
 }
 \arguments{
 \item{data_dt}{input table exported from FloJo}
+
+\item{metaCols_v}{optional columns that need to not be converted to numeric}
 }
 \value{
 input table with the above changes

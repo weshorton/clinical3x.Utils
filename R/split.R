@@ -1,18 +1,22 @@
-splitGmfiOrFuncData <- function(data_dt) {
+splitGmfiOrFuncData <- function(data_dt, metaCols_v = NULL) {
   #' Split Gmfi Or Functional Data
   #' @description
     #' Split into different tables
   #' @param data_dt raw data
+  #' @param metaCols_v optional metadata columns to keep for each
   #' @return list of data.tables made up of input data_dt
   #' @export
   
+  ### Handle null meta columns
+  metaCols_v <- c(metaCols_v, "File")
+  
   ### Get unique cell types
-  cellTypes_v <- setdiff(unique(gsub("_.*$", "", colnames(data_dt))), "File")
+  cellTypes_v <- setdiff(unique(gsub("_.*$", "", colnames(data_dt))), metaCols_v)
   
   ### Split
   out_lsdt <- sapply(cellTypes_v, function(x) {
     grep_v <- paste0(gsub("\\+", "\\\\\\+", x), "_")
-    data_dt <- data_dt[,mget(c("File", grep(grep_v, colnames(data_dt), value = T)))]
+    data_dt <- data_dt[,mget(c(metaCols_v, grep(grep_v, colnames(data_dt), value = T)))]
     colnames(data_dt) <- gsub("^.*_", "", colnames(data_dt))
     return(data_dt)
   }, simplify = F, USE.NAMES = T)
@@ -23,6 +27,7 @@ splitGmfiOrFuncData <- function(data_dt) {
 } # splitGmfiOrFuncData
 
 splitMinorPops <- function(data_dt, 
+                           metaCols_v = NULL,
                            map_lsv = list("Bcells" = c("CD19+ CD20+ B cells", "CD19+CD20- Plasmablasts Plasma cells"),
                                           "Tcells" = c("CD4+ T cells", "CD8+ T cells", "CD8+ CD4+ double positive T cells", 
                                                        "CD8- CD4- double negative T cells"),
@@ -37,29 +42,37 @@ splitMinorPops <- function(data_dt,
   #' @description
   #' Split into different tables
   #' @param data_dt raw data
+  #' @param metaCols_v optional metadata columns to keep for each
   #' @param map_lsv named list indicating which populations to put into which output data.table
   #' @return list of data.tables made up of input data_dt
   #' @export
   
+  ### Handle null meta columns
+  metaCols_v <- c(metaCols_v, "File")
+  
   out_lsdt <- sapply(names(map_lsv), function(x) {
     pops_v <- map_lsv[[x]]
-    data_dt[,mget(c("File", pops_v))]
+    data_dt[,mget(c(metaCols_v, pops_v))]
   }, simplify = F, USE.NAMES = T)
   
   return(out_lsdt)
   
 } # splitMinorPops
 
-splitTSubsets <- function(data_dt, split_v = c("CD4", "CD8")) {
+splitTSubsets <- function(data_dt, metaCols_v = NULL, split_v = c("CD4", "CD8")) {
   #' Split T Subsets
   #' @description
   #' Split into different tables
   #' @param data_dt raw data
+  #' @param metaCols_v optional metadata columns to keep for each
   #' @return list of data.tables made up of input data_dt
   #' @export
   
+  ### Handle null meta columns
+  metaCols_v <- c(metaCols_v, "File")
+  
   out_lsdt <- sapply(split_v, function(x) {
-    data_dt[,mget(c("File", grep(x, colnames(data_dt), value = T)))]
+    data_dt[,mget(c(metaCols_v, grep(x, colnames(data_dt), value = T)))]
   }, simplify = F, USE.NAMES = T)
   
   return(out_lsdt)

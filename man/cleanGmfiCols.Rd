@@ -4,10 +4,12 @@
 \alias{cleanGmfiCols}
 \title{Clean GMFI Columns}
 \usage{
-cleanGmfiCols(data_dt)
+cleanGmfiCols(data_dt, metaCols_v = NULL)
 }
 \arguments{
 \item{data_dt}{input table exported from FloJo}
+
+\item{metaCols_v}{optional metadata columns that don't need fixing}
 }
 \value{
 input table with new column names

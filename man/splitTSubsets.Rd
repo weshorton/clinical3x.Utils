@@ -4,10 +4,12 @@
 \alias{splitTSubsets}
 \title{Split T Subsets}
 \usage{
-splitTSubsets(data_dt, split_v = c("CD4", "CD8"))
+splitTSubsets(data_dt, metaCols_v = NULL, split_v = c("CD4", "CD8"))
 }
 \arguments{
 \item{data_dt}{raw data}
+
+\item{metaCols_v}{optional metadata columns to keep for each}
 }
 \value{
 list of data.tables made up of input data_dt

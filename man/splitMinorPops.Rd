@@ -6,6 +6,7 @@
 \usage{
 splitMinorPops(
   data_dt,
+  metaCols_v = NULL,
   map_lsv = list(Bcells = c("CD19+ CD20+ B cells",
     "CD19+CD20- Plasmablasts Plasma cells"), Tcells = c("CD4+ T cells", "CD8+ T cells",
     "CD8+ CD4+ double positive T cells", "CD8- CD4- double negative T cells"), NKcells =
@@ -20,6 +21,8 @@ splitMinorPops(
 }
 \arguments{
 \item{data_dt}{raw data}
+
+\item{metaCols_v}{optional metadata columns to keep for each}
 
 \item{map_lsv}{named list indicating which populations to put into which output data.table}
 }

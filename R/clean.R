@@ -1,8 +1,9 @@
-cleanFuncCols <- function(data_dt) {
+cleanFuncCols <- function(data_dt, metaCols_v = NULL) {
   #' Clean Functional Columns
   #' @description
     #' Simplify the names for each population(s) functional markers from the FloJo output
   #' @param data_dt input table exported from FloJo
+  #' @param metaCols_v optional metadata columns that don't need fixing
   #' @details
   #' Clean up columns by 
   #' 1. removing everything after the |
@@ -14,6 +15,13 @@ cleanFuncCols <- function(data_dt) {
   #' @return input table with new column names
   #' @export
   
+  ### A single unnamed column is the file column. If more than one unname, not sure what to do yet
+  unnamedFileCol_v <- grep("\\.\\.\\.[0-9]+", colnames(data_dt))
+  if (length(unnamedFileCol_v) == 1) colnames(data_dt)[unnamedFileCol_v] <- "File"
+  
+  ### Meta columns don't need to be modified (the c() here handles if this is NULL)
+  metaCols_v <- c(metaCols_v, "File")
+  
   ### Get colnames
   cols_v <- colnames(data_dt)
   
@@ -22,7 +30,7 @@ cleanFuncCols <- function(data_dt) {
   
   ### Split on slash
   cols_v <- unname(sapply(cols_v, function(x) {
-    if (x == "File") {
+    if (x %in% metaCols_v) {
       out <- x
     } else {
       y <- strsplit(x, split = "\\/")[[1]]
@@ -40,18 +48,23 @@ cleanFuncCols <- function(data_dt) {
   ### Get rid of the + at the end of the functional markers
   colnames(data_dt) <- gsub("\\+$", "", colnames(data_dt))
   
-  ### There is one double-positive
+  ### Change "IFN g" to just "IFNg"
+  colnames(data_dt) <- gsub("IFN g", "IFNg", colnames(data_dt))
+  
+  ### There is one double-positive 
+  ### (i.e. Ki67+ GZMB+ only the GZMB's + is removed, so still have to remove the Ki67's)
   colnames(data_dt) <- gsub("Ki67\\+ ", "Ki67 ", colnames(data_dt))
   
   ### Return
   return(data_dt)
 } # cleanFuncCols
 
-cleanGmfiCols <- function(data_dt) {
+cleanGmfiCols <- function(data_dt, metaCols_v = NULL) {
   #' Clean GMFI Columns
   #' @description
   #' Simplify the names for each population and marker from the FloJo output
   #' @param data_dt input table exported from FloJo
+  #' @param metaCols_v optional metadata columns that don't need fixing
   #' @details
   #' Clean up columns by 
   #' 1. Extract population - after last / and before |
@@ -60,8 +73,15 @@ cleanGmfiCols <- function(data_dt) {
   #' @return input table with new column names
   #' @export
   
+  ### A single unnamed column is the file column. If more than one unname, not sure what to do yet
+  unnamedFileCol_v <- grep("\\.\\.\\.[0-9]+", colnames(data_dt))
+  if (length(unnamedFileCol_v) == 1) colnames(data_dt)[unnamedFileCol_v] <- "File"
+  
   ### Get colnames
   cols_v <- colnames(data_dt)
+  
+  ### Meta columns don't need to be modified (the c() here handles if this is NULL)
+  metaCols_v <- c(metaCols_v, "File")
   
   ### Get the population (after last / and before the |)
   pops_v <- gsub("^.*\\/", "", gsub(" \\| .*$", "", cols_v))
@@ -70,7 +90,9 @@ cleanGmfiCols <- function(data_dt) {
   marker_v <- gsub("\\)$", "", gsub("^.* \\(", "", cols_v))
   
   ### Combine them together
-  outCols_v <- gsub("_File", "", paste(pops_v, marker_v, sep = "_"))
+  ### Meta columns are in format colName_colName, so have to remove the second occurrence
+  toRm_v <- paste(paste0("_", metaCols_v), collapse = "|")
+  outCols_v <- gsub(toRm_v, "", paste(pops_v, marker_v, sep = "_"))
   
   ### Add back
   colnames(data_dt) <- outCols_v
@@ -91,8 +113,22 @@ cleanStackedCols <- function(data_dt) {
   #' @return input table with new column names
   #' @export
   
+  ### A single unnamed column is the file column. If more than one unname, not sure what to do yet
+  unnamedFileCol_v <- grep("\\.\\.\\.[0-9]+", colnames(data_dt))
+  if (length(unnamedFileCol_v) == 1) colnames(data_dt)[unnamedFileCol_v] <- "File"
+  
   ### Get colnames
   cols_v <- colnames(data_dt)
+  
+  ### Handle ratio columns
+  cols_v <- sapply(cols_v, function(x) ifelse(grepl("[Rr]atio", x), gsub("\\/", " to ", x), x), USE.NAMES = F)
+  
+  ### One-off?? Not sure if this will occur in the others
+  cols_v <- gsub("ï", "i", cols_v)
+  
+  ### 07/22 Th2 has ratio columns at the end that specify they're out of %CD45
+  ### Want to remove this
+  cols_v <- gsub("\\(.*\\)$", "", cols_v)
   
   ### Get the population (after last / and before the |)
   pops_v <- trimws(gsub("^.*\\/", "", gsub(" \\| .*$", "", cols_v)))
@@ -105,11 +141,12 @@ cleanStackedCols <- function(data_dt) {
   
 } # cleanStackedCols
 
-cleanData <- function(data_dt) {
+cleanData <- function(data_dt, metaCols_v = NULL) {
   #' Clean Data
   #' @description
   #' Clean up data from the FloJo output
   #' @param data_dt input table exported from FloJo
+  #' @param metaCols_v optional columns that need to not be converted to numeric
   #' @details
   #' Clean up data by 
   #' 1. Removing 'Mean' and 'SD' rows
@@ -121,6 +158,12 @@ cleanData <- function(data_dt) {
   
   ### Remove mean and SD
   data_dt <- data_dt[!(File %in% c("Mean", "SD"))]
+  
+  ### Split meta
+  if (!is.null(metaCols_v)) {
+    tmp_dt <- data_dt[,mget(metaCols_v)]
+    data_dt <- data_dt[,mget(setdiff(colnames(data_dt), metaCols_v))]
+  } # fi !null meta
   
   ### Fix n/a
   for (j in colnames(data_dt)) set(data_dt, which(data_dt[[j]] %in% c("n/a", "n/a %")), j, NA)
@@ -137,6 +180,11 @@ cleanData <- function(data_dt) {
   ### Remove any fully NA columns
   toRm_v <- names(which(apply(data_dt, 2, function(x) length(which(is.na(x)))) == nrow(data_dt)))
   for (col_v in toRm_v) data_dt[[col_v]] <- NULL
+  
+  ### Add back meta columns, if present
+  if (!is.null(metaCols_v)) {
+    data_dt <- cbind(tmp_dt, data_dt)
+  } # fi !null meta
   
   ### Output
   return(data_dt)
