@@ -47,7 +47,7 @@ plotCycleCompareLine <- function(data_dt, dataCols_v,
     labels_v <- sortTimePoints(as.character(unique(c(curr_dt$`Time point_1`, curr_dt$`Time point_2`))))
     axis_gg <- ggplot() +
       geom_point(aes(x = 1, y = 1), alpha = 0) +
-      scale_x_continuous(limits = c(1, 4), breaks = 1:4, labels = c(labels_v)) +
+      scale_x_continuous(limits = c(1, length(labels_v)), breaks = 1:length(labels_v), labels = c(labels_v)) +
       theme_void() +
       theme(axis.line.y = element_blank(),
             axis.text.y = element_blank(),
