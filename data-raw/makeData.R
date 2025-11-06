@@ -40,14 +40,45 @@ timePoints_v <- sortTimePoints(timePoints_v)
 
 usethis::use_data(timePoints_v, overwrite = T)
 
-c1_v <- brewer.pal(9, "Oranges")[2:(length(grep("C1", timePoints_v))+1)]
-c2_v <- brewer.pal(9, "Greens")[2:(length(grep("C2", timePoints_v))+1)]
-c3_v <- brewer.pal(9, "Reds")[2:(length(grep("C3", timePoints_v))+1)]
-cOther_v <- brewer.pal(9, "Blues")[2:(length(grep("C[4-9]", timePoints_v))+1)]
+c1_v <- brewer.pal(9, "YlOrRd")[(9-length(grep("C1", timePoints_v))):8]
+# c1_v <- brewer.pal(9, "YlOrRd")[(10-length(grep("C1", timePoints_v))):9] # this one makes C1 a tad darker
+c2_v <- brewer.pal(9, "YlGn")[(8-length(grep("C2", timePoints_v))):7]
+c3_v <- brewer.pal(9, "BuPu")[(8-length(grep("C3", timePoints_v))):7]
+cOther_v <- brewer.pal(9, "YlGnBu")[(8-length(grep("C[4-9]", timePoints_v))):7]
 timeColors_v <- c(c1_v, c2_v, c3_v, cOther_v)
 names(timeColors_v) <- timePoints_v
 
 usethis::use_data(timeColors_v, overwrite = T)
+
+### Individual time colors
+area7_v <- cols4all::c4a("area7")
+friendly11_v <- cols4all::c4a("friendly11")
+line7_v <- cols4all::c4a("line7")
+tableauCB_v <- cols4all::c4a("tableau.color_blind")
+tolMuted_v <- cols4all::c4a("tol.muted")
+
+c1Colors_v <- area7_v[1:length(grep("C1", timePoints_v))]
+names(c1Colors_v) <- grep("C1", timePoints_v, value = T)
+
+c2Colors_v <- line7_v[1:length(grep("C2", timePoints_v))]
+names(c2Colors_v) <- grep("C2", timePoints_v, value = T)
+
+c3Colors_v <- tolMuted_v[1:length(grep("C3", timePoints_v))]
+names(c3Colors_v) <- grep("C3", timePoints_v, value = T)
+
+cOtherColors_v <- tableauCB_v[1:length(grep("C[4-9]", timePoints_v))]
+names(cOtherColors_v) <- grep("C[4-9]", timePoints_v, value = T)
+
+d1Colors_v <- friendly11_v[1:length(grep("D1$", timePoints_v))]
+names(d1Colors_v) <- grep("D1$", timePoints_v, value = T)
+
+indTimeColors_lsv <- list("C1" = c1Colors_v,
+                          "C2" = c2Colors_v,
+                          "C3" = c3Colors_v,
+                          "COther" = cOtherColors_v,
+                          "D1" = d1Colors_v)
+
+usethis::use_data(indTimeColors_lsv, overwrite = T)
 
 ### Get cycles (not used)
 cycles_v <- unique(gsub("D.*", "", timePoints_v))

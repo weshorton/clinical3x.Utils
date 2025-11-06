@@ -57,6 +57,18 @@
 #'  }
 "timeColors_v"
 
+#' Individual Time Colors
+#' 
+#' Colors for each cycle for specific plots
+#' 
+#' @format ## 'indTimeColors_lsv'
+#' Named list of length 5
+#' \describe{
+#'    \item{values}{Color-blind friendly colors}
+#'    \item{names}{name of cycle or day set}
+#' }
+"indTimeColors_lsv"
+
 #' Dir Colors
 #' 
 #' Colors to differentiate direction of measurement change
