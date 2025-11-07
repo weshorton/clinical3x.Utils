@@ -2,7 +2,8 @@ ggPlotRadar <- function(data_dt, markerCol_v = "marker", markers_v,
                         patientCol_v = "Patients", patientColors_v,
                         timeCol_v = "Time point", time_v = NULL, 
                         name_v = NULL, plotGlobalMax_v = T,
-                        file_v = NULL) {
+                        removeEmpties_v = F,
+                        metaCols_v = NULL, file_v = NULL) {
   #' Plot Radar
   #' @description Wrapper for FSMB Radar plot
   #' @param data_dt data.table with functional markers
@@ -13,6 +14,9 @@ ggPlotRadar <- function(data_dt, markerCol_v = "marker", markers_v,
   #' @param timeCol_v which column in data_dt identifies different time points. One radar plot per time
   #' @param time_v optional vector to only plot specific time points instead of all available
   #' @param name_v optional vector to label the entire plot (e.g. CD4+ Tcm)
+  #' @param plotGlobalMax_v logical indicating if scale should be global (T) or individual (F)
+  #' @param removeEmpties_v logical indicating if empty markers should be removed from the plot (T) or kept (F)
+  #' @param metaCols_v optional metadata columns that need to be excluded from calculations
   #' @param file_v optional file to save output. If NULL, will print to console
   #' @return returns NULL (print to console). Save pdf if file_v is provided.
   #' @details I think this is more difficult than it needs to be? If I give a melted table then I might have more flexibility on what
@@ -36,7 +40,7 @@ ggPlotRadar <- function(data_dt, markerCol_v = "marker", markers_v,
   maxPt_v <- length(unique(data_dt[[patientCol_v]]))
   
   ### New - get globals
-  plotCols_v <- setdiff(colnames(data_dt), c(patientCol_v, timeCol_v))
+  plotCols_v <- setdiff(colnames(data_dt), unique(c(patientCol_v, timeCol_v, metaCols_v)))
   globalMax_v <- max(data_dt[, mget(plotCols_v)])
   globalMin_v <- min(data_dt[, mget(plotCols_v)])
   globalMid_v <- round((globalMax_v - globalMin_v) / 2, 2)
@@ -55,9 +59,11 @@ ggPlotRadar <- function(data_dt, markerCol_v = "marker", markers_v,
     curr_dt <- curr_dt[,mget(plotCols_v)]
     
     ### Remove empty marker columns (messes up the output)
-    colSums_dt <- curr_dt[,lapply(.SD, sum), .SDcols = markers_v]
-    rmCols_v <- colnames(colSums_dt)[which(colSums_dt == 0)]
-    for (col_v in rmCols_v) curr_dt[[col_v]] <- NULL
+    if (removeEmpties_v) {
+      colSums_dt <- curr_dt[,lapply(.SD, sum), .SDcols = markers_v]
+      rmCols_v <- colnames(colSums_dt)[which(colSums_dt == 0)]
+      for (col_v in rmCols_v) curr_dt[[col_v]] <- NULL
+    }
     
     ### Must have at least 3 variables in order to plot
     if (ncol(curr_dt) < 4) next
@@ -80,11 +86,17 @@ ggPlotRadar <- function(data_dt, markerCol_v = "marker", markers_v,
     currTime_v <- names(data_lsdt)[i]
     curr_dt <- data_lsdt[[currTime_v]]
     
-    plot_lsgg[[currTime_v]] <- makeRadar(curr_dt, currTime_v, patientCol_v, patientColors_v, 
+    plot_lsgg[[currTime_v]] <- makeRadar(curr_dt = curr_dt, 
+                                         currTime_v = currTime_v, 
+                                         patientCol_v = patientCol_v, 
+                                         patientColors_v = patientColors_v, 
                                          #legend_v = makeLegend_v, 
                                          plotGlobalMax_v = plotGlobalMax_v,
-                                         maxPt_v,
-                                         globalMin_v, globalMid_v, globalMax_v)
+                                         maxPt_v = maxPt_v,
+                                         globalMin_v = globalMin_v, 
+                                         globalMid_v = globalMid_v, 
+                                         globalMax_v = globalMax_v)
+    
     
     if (!gotLegend_v & nrow(curr_dt) == maxPt_v) {
       leg <- plot_lsgg[[currTime_v]]$legend
@@ -112,7 +124,7 @@ ggPlotRadar <- function(data_dt, markerCol_v = "marker", markers_v,
   height_v <- 15*dims_v[2]
   
   ### Combine
-  plot_gg <- ggpubr::ggarrange(plotlist = plot_lsgg, legend = "none", nrow = dims_v[1], ncol = dims_v[2])
+  plot_gg <- suppressMessages(ggpubr::ggarrange(plotlist = plot_lsgg, legend = "none", nrow = dims_v[1], ncol = dims_v[2]))
   
   ### Add title
   if (!is.null(name_v)) {

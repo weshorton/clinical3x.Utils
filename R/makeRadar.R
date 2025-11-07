@@ -103,7 +103,7 @@ makeRadar <- function(curr_dt,
   )
   
   #if (legend_v & nrow(curr_dt) == maxPt_v) {
-  legendGrob <- ggpubr::as_ggplot(g_legend(curr_gg))
+  legendGrob <- suppressMessages(ggpubr::as_ggplot(g_legend(curr_gg)))
   #} # fi
   
   ### Adjust title size

@@ -14,6 +14,8 @@ ggPlotRadar(
   time_v = NULL,
   name_v = NULL,
   plotGlobalMax_v = T,
+  removeEmpties_v = F,
+  metaCols_v = NULL,
   file_v = NULL
 )
 }
@@ -33,6 +35,12 @@ ggPlotRadar(
 \item{time_v}{optional vector to only plot specific time points instead of all available}
 
 \item{name_v}{optional vector to label the entire plot (e.g. CD4+ Tcm)}
+
+\item{plotGlobalMax_v}{logical indicating if scale should be global (T) or individual (F)}
+
+\item{removeEmpties_v}{logical indicating if empty markers should be removed from the plot (T) or kept (F)}
+
+\item{metaCols_v}{optional metadata columns that need to be excluded from calculations}
 
 \item{file_v}{optional file to save output. If NULL, will print to console}
 }
